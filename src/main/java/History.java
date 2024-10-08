@@ -67,7 +67,7 @@ public class History
      */
    public boolean hasUndoData()
    {
-       return (! undoStorage.isEmpty());
+       return (! eventStorage.isEmpty());
    }
 
     /**
@@ -75,7 +75,7 @@ public class History
      */
    public boolean hasReDoData()
    {
-       return (! eventStorage.isEmpty());
+       return (! undoStorage.isEmpty());
    }
 	
 
