@@ -32,9 +32,9 @@ public class History
 	   if (eventStorage.isEmpty()) { return; }
 	   
 	   Event myEvent = eventStorage.pop();
-	   note.remove(myEvent.position, myEvent.event.length());
-	   
 	   undoStorage.push(myEvent);
+	   
+	   note.remove(myEvent.position, myEvent.event.length());
    }
 
 
@@ -48,9 +48,9 @@ public class History
 	   if (undoStorage.isEmpty()) { return; }
 	   
    		Event myEvent = undoStorage.pop();
-   		note.insert(myEvent.position, myEvent.event);
-   		
    		eventStorage.push(myEvent);
+   		
+   		note.insert(myEvent.position, myEvent.event);
    }
 
     /**
