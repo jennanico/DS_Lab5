@@ -5,7 +5,6 @@ public class History
 	
 	Stack<Event> eventStorage = new Stack<Event>();
 	Stack<Event> undoStorage = new Stack<Event>();
-//	Event event;
 	
     /**
        Notepad will call this function when thier text changes.
@@ -34,7 +33,12 @@ public class History
 	   Event myEvent = eventStorage.pop();
 	   undoStorage.push(myEvent);
 	   
-	   note.remove(myEvent.position, myEvent.event.length());
+	   if (myEvent.deletion) {
+		   note.insert(myEvent.position, myEvent.event);
+	   } else {
+	   		note.remove(myEvent.position, myEvent.event.length());
+	   }
+	   
    }
 
 
@@ -50,7 +54,12 @@ public class History
    		Event myEvent = undoStorage.pop();
    		eventStorage.push(myEvent);
    		
-   		note.insert(myEvent.position, myEvent.event);
+ 	   if (myEvent.deletion) {
+		   note.remove(myEvent.position, myEvent.event.length());
+	   } else {
+		   note.insert(myEvent.position, myEvent.event);   
+	   }
+	   
    }
 
     /**
@@ -58,7 +67,7 @@ public class History
      */
    public boolean hasUndoData()
    {
-       return (!undoStorage.isEmpty());
+       return (! undoStorage.isEmpty());
    }
 
     /**
@@ -66,7 +75,7 @@ public class History
      */
    public boolean hasReDoData()
    {
-       return (!eventStorage.isEmpty());
+       return (! eventStorage.isEmpty());
    }
 	
 
